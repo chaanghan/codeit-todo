@@ -30,3 +30,23 @@ export async function getTodos(): Promise<TodoItemList[]> {
 
   return res.json();
 }
+
+// 할 일 수정
+export async function updateTodo(
+  itemId: number,
+  isCompleted: boolean,
+): Promise<TodoItem> {
+  const res = await fetch(`${BASE_URL}/items/${itemId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ isCompleted }),
+  });
+
+  if (!res.ok) {
+    throw new Error('Todo 수정 실패');
+  }
+
+  return res.json();
+}

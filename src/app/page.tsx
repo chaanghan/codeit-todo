@@ -1,12 +1,17 @@
 'use client';
 
-import { addTodo, getTodos } from '@/lib/todo';
+import Done from '@/components/Done';
+import Todo from '@/components/Todo';
+import { addTodo, getTodos, updateTodo } from '@/lib/todo';
 import { TodoItemList } from '@/types/type';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 export default function Home() {
   const [name, setName] = useState('');
   const [todos, setTodos] = useState<TodoItemList[]>([]);
+
+  const todoList = todos.filter((todo) => !todo.isCompleted);
+  const doneList = todos.filter((todo) => todo.isCompleted);
 
   console.log('todos', todos);
 
@@ -24,14 +29,27 @@ export default function Home() {
     setName(e.target.value);
   };
 
+  const handleUpdateTodo = async (id: number, isCompleted: boolean) => {
+    try {
+      // 1. 수정 api 요청
+      const updatedTodo = await updateTodo(id, isCompleted);
+
+      // 2. state 수정
+      setTodos((prev) =>
+        prev.map((todo) => (todo.id === id ? updatedTodo : todo)),
+      );
+    } catch (error) {
+      console.error('할 일 수정 실패', error);
+    }
+  };
+
   const handleAddName = async () => {
     if (!name.trim()) return;
     setName('');
 
     try {
-      await addTodo({ name });
-      await loadTodos();
-      // 추가 후 다시 조회해서 리렌더링 되어야 함
+      await addTodo({ name }); // 1. 추가 api dycjd
+      await loadTodos(); // 2. 데이터 로드
     } catch (error) {
       console.error('할 일 추가 실패', error);
     }
@@ -73,6 +91,10 @@ export default function Home() {
           }}
         />
         <button onClick={handleAddName}>추가하기</button>
+      </div>
+      <div className="flex">
+        <Todo items={todoList} onToggle={handleUpdateTodo} />
+        <Done items={doneList} onToggle={handleUpdateTodo} />
       </div>
     </div>
   );
