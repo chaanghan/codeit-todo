@@ -89,6 +89,7 @@ export default function Home() {
               handleAddName();
             }
           }}
+          placeholder="할 일을 입력해주세요"
         />
         <button onClick={handleAddName}>추가하기</button>
       </div>
