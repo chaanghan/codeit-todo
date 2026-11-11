@@ -1,5 +1,6 @@
 'use client';
 
+import AddButton from '@/components/AddButton';
 import Done from '@/components/Done';
 import Todo from '@/components/Todo';
 import { addTodo, getTodos, updateTodo } from '@/lib/todo';
@@ -12,6 +13,8 @@ export default function Home() {
 
   const todoList = todos.filter((todo) => !todo.isCompleted);
   const doneList = todos.filter((todo) => todo.isCompleted);
+
+  const isEmpty = todos.length === 0;
 
   console.log('todos', todos);
 
@@ -78,20 +81,34 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <div>
-        <input
-          type="text"
-          onChange={onChange}
-          value={name}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
-              handleAddName();
-            }
-          }}
-          placeholder="할 일을 입력해주세요"
-        />
-        <button onClick={handleAddName}>추가하기</button>
+    <div className="mx-auto w-full max-w-300 px-5">
+      <div className="w-full">
+        <div className=" flex gap-4 my-4">
+          <input
+            type="text"
+            onChange={onChange}
+            value={name}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+                handleAddName();
+              }
+            }}
+            placeholder="할 일을 입력해주세요"
+            className="
+          h-14
+            min-w-0
+            flex-1
+          rounded-full
+          border-2
+          border-slate-900
+          bg-slate-100
+          px-5
+          outline-none
+          shadow-[3px_4px_0px_#0F172A]
+          "
+          />
+          <AddButton onClick={handleAddName} isEmpty={isEmpty} />
+        </div>
       </div>
       <div className="flex">
         <Todo items={todoList} onToggle={handleUpdateTodo} />
