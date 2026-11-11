@@ -82,8 +82,8 @@ export default function Home() {
 
   return (
     <div className="mx-auto w-full max-w-300 px-5">
-      <div className="w-full">
-        <div className=" flex gap-4 my-4">
+      <div className="w-full py-6">
+        <div className="flex gap-4">
           <input
             type="text"
             onChange={onChange}
@@ -96,8 +96,8 @@ export default function Home() {
             placeholder="할 일을 입력해주세요"
             className="
           h-14
-            min-w-0
-            flex-1
+          min-w-0
+          flex-1
           rounded-full
           border-2
           border-slate-900
@@ -110,7 +110,7 @@ export default function Home() {
           <AddButton onClick={handleAddName} isEmpty={isEmpty} />
         </div>
       </div>
-      <div className="flex">
+      <div className="grid grid-cols-1 gap-6 py-4 lg:grid-cols-2">
         <Todo items={todoList} onToggle={handleUpdateTodo} />
         <Done items={doneList} onToggle={handleUpdateTodo} />
       </div>
