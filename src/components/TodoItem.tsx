@@ -50,14 +50,17 @@ export default function TodoItem({
             width={32}
             height={32}
             alt="checkbox image"
+            className="cursor-pointer"
           />
         </label>
 
         <div
-          onClick={() => router.push(`/items/${id}`)}
+          onClick={() => {
+            if (variant === 'LIST') router.push(`/items/${id}`);
+          }}
           className={`
           ${type === 'TODO' ? '' : 'line-through'} 
-          ${variant === 'LIST' ? 'flex-1' : 'underline'}  cursor-pointer`}
+          ${variant === 'LIST' ? 'flex-1 cursor-pointer' : 'underline'}`}
         >
           {name}
         </div>

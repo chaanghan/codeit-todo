@@ -17,6 +17,11 @@ export default function TodoDetailClient({
 
   const { id } = todo;
   console.log(todo);
+
+  const updateTodoCheckbox = async (id: number, isCompleted: boolean) => {
+    setTodo((prev) => ({ ...prev, isCompleted }));
+  };
+
   return (
     <div className="flex flex-col flex-1 bg-gray-50">
       <div className="w-full flex-1 max-w-300 mx-auto bg-white px-[102px] ">
@@ -26,6 +31,7 @@ export default function TodoDetailClient({
             item={todo}
             type={todo.isCompleted ? 'DONE' : 'TODO'}
             variant="DETAIL"
+            onToggle={updateTodoCheckbox}
           />
         </div>
         {/* 이미지 및 텍스트 */}
