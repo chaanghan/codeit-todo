@@ -108,7 +108,12 @@ export default function Home() {
           shadow-[3px_4px_0px_#0F172A]
           "
           />
-          <AddButton onClick={handleAddName} isEmpty={isEmpty} />
+          {/* <AddButton onClick={handleAddName} isEmpty={isEmpty} /> */}
+          <CustomButton
+            label="추가하기"
+            isActive={isEmpty}
+            onClick={handleAddName}
+          />
         </div>
       </div>
       <div className="grid grid-cols-1 gap-6 py-4 lg:grid-cols-2">
