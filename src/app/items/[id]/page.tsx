@@ -1,8 +1,14 @@
-export default async function TodoDetailPage({
-  params,
-}: {
+import { Suspense } from 'react';
+import TodoDetailContent from './TodoDetailContent';
+
+interface TodoDetailPageProps {
   params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  return <div></div>;
+}
+
+export default function TodoDetailPage({ params }: TodoDetailPageProps) {
+  return (
+    <Suspense fallback={<div>상세 페이지 로딩 중...</div>}>
+      <TodoDetailContent params={params} />
+    </Suspense>
+  );
 }
