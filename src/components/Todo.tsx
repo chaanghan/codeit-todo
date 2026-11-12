@@ -21,7 +21,13 @@ export default function Todo({ items, onToggle }: TodoProps) {
       </div>
       <div className="flex flex-col gap-2">
         {items.map((item) => (
-          <TodoItem key={item.id} item={item} onToggle={onToggle} type="TODO" />
+          <TodoItem
+            key={item.id}
+            item={item}
+            onToggle={onToggle}
+            type="TODO"
+            variant="LIST"
+          />
         ))}
       </div>
     </div>

@@ -31,6 +31,17 @@ export async function getTodos(): Promise<TodoItemList[]> {
   return res.json();
 }
 
+// 특정 id 조회
+export async function getTodo(itemId: number): Promise<TodoItem> {
+  const res = await fetch(`${BASE_URL}/items/${itemId}`);
+
+  if (!res.ok) {
+    throw new Error('Todo 조회 실패');
+  }
+
+  return res.json();
+}
+
 // 할 일 수정
 export async function updateTodo(
   itemId: number,
