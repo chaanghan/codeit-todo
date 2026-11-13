@@ -1,6 +1,5 @@
 'use client';
 
-import AddButton from '@/components/AddButton';
 import CustomButton from '@/components/CustomButton';
 import Done from '@/components/Done';
 import Todo from '@/components/Todo';
@@ -36,7 +35,7 @@ export default function Home() {
   const handleUpdateTodo = async (id: number, isCompleted: boolean) => {
     try {
       // 수정 api 요청
-      const updatedTodo = await updateTodo(id, isCompleted);
+      const updatedTodo = await updateTodo(id, { isCompleted });
 
       // state 수정
       setTodos((prev) =>

@@ -1,10 +1,12 @@
-import { TodoItem, TodoItemList } from '@/types/type';
+import { TodoItemType, TodoItemList } from '@/types/type';
 
 const tenantId = 'changhan-todo';
 export const BASE_URL = `https://assignment-todolist-api.vercel.app/api/${tenantId}`;
 
+type AddTodoRequestType = Pick<TodoItemType, 'name'>;
+
 // 할 일 추가
-export async function addTodo(data: Pick<TodoItem, 'name'>) {
+export async function addTodo(data: AddTodoRequestType): Promise<TodoItemType> {
   const res = await fetch(`${BASE_URL}/items`, {
     method: 'POST',
     headers: {
@@ -32,7 +34,7 @@ export async function getTodos(): Promise<TodoItemList[]> {
 }
 
 // 특정 id 조회
-export async function getTodo(itemId: number): Promise<TodoItem> {
+export async function getTodo(itemId: number): Promise<TodoItemType> {
   const res = await fetch(`${BASE_URL}/items/${itemId}`);
 
   if (!res.ok) {
@@ -42,17 +44,21 @@ export async function getTodo(itemId: number): Promise<TodoItem> {
   return res.json();
 }
 
+type UpdateTodoRequestType = Partial<
+  Pick<TodoItemType, 'name' | 'memo' | 'imageUrl' | 'isCompleted'>
+>;
+
 // 할 일 수정
 export async function updateTodo(
   itemId: number,
-  isCompleted: boolean,
-): Promise<TodoItem> {
+  data: UpdateTodoRequestType,
+): Promise<TodoItemType> {
   const res = await fetch(`${BASE_URL}/items/${itemId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ isCompleted }),
+    body: JSON.stringify(data),
   });
 
   if (!res.ok) {
@@ -60,4 +66,23 @@ export async function updateTodo(
   }
 
   return res.json();
+}
+
+// 이미지 업로드
+export async function uploadImage(file: File): Promise<string> {
+  const formData = new FormData();
+
+  formData.append('image', file);
+
+  const res = await fetch(`${BASE_URL}/images/upload`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!res.ok) {
+    throw new Error('Todo 이미지 업로드 실패');
+  }
+  const result = await res.json();
+
+  return result.url;
 }

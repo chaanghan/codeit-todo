@@ -5,6 +5,8 @@ import { TodoItemType } from '@/types/type';
 import TodoItem from '@/components/TodoItem';
 import CustomButton from '@/components/CustomButton';
 import TodoImage from '@/components/TodoImage';
+import { updateTodo, uploadImage } from '@/lib/todo';
+import { useRouter } from 'next/navigation';
 
 interface TodoDetailClientProps {
   initialTodo: TodoItemType;
@@ -18,6 +20,7 @@ export default function TodoDetailClient({
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const { id } = todo;
+  const router = useRouter();
 
   // 메모, 이름, 완료 여부, 이미지의 변경 여부
   const isChange =
@@ -27,7 +30,6 @@ export default function TodoDetailClient({
     selectedImage !== null;
 
   console.log(todo);
-  console.log(selectedImage);
 
   const updateTodoCheckbox = (id: number, isCompleted: boolean) => {
     setTodo((prev) => ({ ...prev, isCompleted }));
@@ -39,6 +41,31 @@ export default function TodoDetailClient({
 
   const updateTodoName = (e: ChangeEvent<HTMLInputElement>) => {
     setTodo((prev) => ({ ...prev, name: e.target.value }));
+  };
+
+  // 최종 할 일 수정
+  const saveTodo = async () => {
+    try {
+      let imageUrl = todo.imageUrl ?? '';
+
+      // 이미지 업로드
+      if (selectedImage) {
+        imageUrl = await uploadImage(selectedImage);
+      }
+
+      // 할 일 수정
+      await updateTodo(todo.id, {
+        name: todo.name,
+        memo: todo.memo ?? '',
+        imageUrl,
+        isCompleted: todo.isCompleted,
+      });
+    } catch (error) {
+      console.error('할 일 수정 실패', error);
+      alert('실패했습니다. 다시 시도해 주세요.');
+    } finally {
+      router.replace('/'); // 홈으로 이동
+    }
   };
 
   return (
@@ -92,7 +119,11 @@ export default function TodoDetailClient({
         {/* 버튼 */}
         <div className="flex justify-end pt-6">
           <div className="flex gap-4">
-            <CustomButton label="수정 완료" isActive={isChange} />
+            <CustomButton
+              label="수정 완료"
+              isActive={isChange}
+              onClick={saveTodo}
+            />
             <CustomButton label="삭제하기" />
           </div>
         </div>
