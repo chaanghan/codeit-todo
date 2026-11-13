@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { TodoItemList } from '@/types/type';
 import TodoItem from '@/components/TodoItem';
 import Image from 'next/image';
@@ -18,13 +18,22 @@ export default function TodoDetailClient({
   const { id } = todo;
   console.log(todo);
 
-  const updateTodoCheckbox = async (id: number, isCompleted: boolean) => {
+  const updateTodoCheckbox = (id: number, isCompleted: boolean) => {
     setTodo((prev) => ({ ...prev, isCompleted }));
+  };
+
+  const updateTodoMemo = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setTodo((prev) => ({ ...prev, memo: e.target.value }));
+  };
+
+  const updateTodoName = (e: ChangeEvent<HTMLInputElement>) => {
+    setTodo((prev) => ({ ...prev, name: e.target.value }));
   };
 
   return (
     <div className="flex flex-col flex-1 bg-gray-50">
       <div className="w-full flex-1 max-w-300 mx-auto bg-white px-[102px] ">
+        {/* 할 일 */}
         <div className="py-6">
           <TodoItem
             key={id}
@@ -32,6 +41,7 @@ export default function TodoDetailClient({
             type={todo.isCompleted ? 'DONE' : 'TODO'}
             variant="DETAIL"
             onToggle={updateTodoCheckbox}
+            onChangeName={updateTodoName}
           />
         </div>
         {/* 이미지 및 텍스트 */}
@@ -61,6 +71,7 @@ export default function TodoDetailClient({
               name=""
               id=""
               className="flex-1 w-full p-2 resize-none outline-none"
+              onChange={updateTodoMemo}
             ></textarea>
           </div>
         </div>

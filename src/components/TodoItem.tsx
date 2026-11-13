@@ -1,6 +1,7 @@
 import { TodoItemList } from '@/types/type';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { ChangeEvent } from 'react';
 
 type TodoState = 'TODO' | 'DONE';
 type TodoVariant = 'LIST' | 'DETAIL';
@@ -10,6 +11,7 @@ interface TodoItemProps {
   onToggle: (id: number, checked: boolean) => void;
   type: TodoState;
   variant: TodoVariant;
+  onChangeName?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function TodoItem({
@@ -17,6 +19,7 @@ export default function TodoItem({
   onToggle,
   type,
   variant,
+  onChangeName,
 }: TodoItemProps) {
   const { id, name, isCompleted } = item;
   const router = useRouter();
@@ -34,6 +37,7 @@ export default function TodoItem({
         `}
     >
       <div className="flex gap-2 items-center">
+        {/* 체크 박스 */}
         <label>
           <input
             type="checkbox"
@@ -54,7 +58,27 @@ export default function TodoItem({
           />
         </label>
 
-        <div
+        {/* 이름 */}
+        {variant === 'LIST' ? (
+          <div
+            onClick={() => router.push(`/items/${id}`)}
+            className={`
+          ${type === 'TODO' ? '' : 'line-through'} cursor-pointer flex-1`}
+          >
+            {name}
+          </div>
+        ) : (
+          <>
+            <input
+              type="text"
+              value={name}
+              className="outline-none"
+              onChange={onChangeName}
+            />
+          </>
+        )}
+
+        {/* <div
           onClick={() => {
             if (variant === 'LIST') router.push(`/items/${id}`);
           }}
@@ -63,7 +87,7 @@ export default function TodoItem({
           ${variant === 'LIST' ? 'flex-1 cursor-pointer' : 'underline'}`}
         >
           {name}
-        </div>
+        </div> */}
       </div>
     </div>
   );
