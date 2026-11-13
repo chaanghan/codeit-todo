@@ -35,10 +35,10 @@ export default function Home() {
 
   const handleUpdateTodo = async (id: number, isCompleted: boolean) => {
     try {
-      // 1. 수정 api 요청
+      // 수정 api 요청
       const updatedTodo = await updateTodo(id, isCompleted);
 
-      // 2. state 수정
+      // state 수정
       setTodos((prev) =>
         prev.map((todo) => (todo.id === id ? updatedTodo : todo)),
       );
@@ -52,8 +52,8 @@ export default function Home() {
     setName('');
 
     try {
-      await addTodo({ name }); // 1. 추가 api dycjd
-      await loadTodos(); // 2. 데이터 로드
+      await addTodo({ name }); // 추가 api 요청
+      await loadTodos(); // 데이터 로드
     } catch (error) {
       console.error('할 일 추가 실패', error);
     }

@@ -1,13 +1,13 @@
 'use client';
 
 import { ChangeEvent, useState } from 'react';
-import { TodoItemList } from '@/types/type';
+import { TodoItemType } from '@/types/type';
 import TodoItem from '@/components/TodoItem';
-import Image from 'next/image';
 import CustomButton from '@/components/CustomButton';
+import TodoImage from '@/components/TodoImage';
 
 interface TodoDetailClientProps {
-  initialTodo: TodoItemList;
+  initialTodo: TodoItemType;
 }
 
 export default function TodoDetailClient({
@@ -15,8 +15,11 @@ export default function TodoDetailClient({
 }: TodoDetailClientProps) {
   const [todo, setTodo] = useState(initialTodo);
 
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
   const { id } = todo;
   console.log(todo);
+  console.log(selectedImage);
 
   const updateTodoCheckbox = (id: number, isCompleted: boolean) => {
     setTodo((prev) => ({ ...prev, isCompleted }));
@@ -44,28 +47,30 @@ export default function TodoDetailClient({
             onChangeName={updateTodoName}
           />
         </div>
+
         {/* 이미지 및 텍스트 */}
         <div className="grid grid-cols-[2fr_3fr] gap-4 ">
-          <div className="h-[311px] relative flex justify-center items-center bg-slate-50 rounded-2xl border-slate-300 border-2 border-dashed">
-            {/* 이미지 추가 버튼 */}
-            <div className="absolute right-4 bottom-4 flex justify-center items-center bg-slate-200 rounded-full w-16 h-16">
-              <Image
-                src={'/images/image-plus.svg'}
-                width={24}
-                height={24}
-                alt="image-plus"
-              />
-            </div>
-
-            <Image
-              src={'/images/img.svg'}
-              width={64}
-              height={64}
-              alt="select image"
+          <div
+            className={`
+              h-[311px] rounded-2xl relative 
+              flex justify-center items-center 
+              bg-slate-50  
+              ${selectedImage ? '' : 'border-slate-300 border-2 border-dashed'}`}
+          >
+            <TodoImage
+              imageUrl={todo.imageUrl}
+              onImageChange={setSelectedImage}
+              selectedImage={selectedImage}
             />
           </div>
 
-          <div className="h-[311px] rounded-2xl bg-[url('/images/memo.png')] bg-cover bg-center flex flex-col items-center p-4">
+          {/* 메모 */}
+          <div
+            className="
+            h-[311px] p-4
+            rounded-2xl bg-[url('/images/memo.png')] bg-cover bg-center 
+            flex flex-col items-center"
+          >
             <span className="text-amber-800">Memo</span>
             <textarea
               name=""

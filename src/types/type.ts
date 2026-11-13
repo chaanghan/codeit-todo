@@ -1,4 +1,4 @@
-export type TodoItem = {
+export type TodoItemType = {
   id: number;
   tenantId: string;
   name: string;
@@ -7,4 +7,4 @@ export type TodoItem = {
   isCompleted: boolean;
 };
 
-export type TodoItemList = Pick<TodoItem, 'id' | 'isCompleted' | 'name'>;
+export type TodoItemList = Pick<TodoItemType, 'id' | 'isCompleted' | 'name'>;
