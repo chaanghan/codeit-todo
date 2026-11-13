@@ -69,7 +69,7 @@ const textStyles: Record<
     inactive: 'text-white',
   },
   '수정 완료': {
-    active: '',
+    active: 'bg-lime-300',
     inactive: '',
   },
 };

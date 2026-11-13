@@ -18,6 +18,14 @@ export default function TodoDetailClient({
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const { id } = todo;
+
+  // 메모, 이름, 완료 여부, 이미지의 변경 여부
+  const isChange =
+    (todo.memo ?? '') !== (initialTodo.memo ?? '') ||
+    todo.name !== initialTodo.name ||
+    todo.isCompleted !== initialTodo.isCompleted ||
+    selectedImage !== null;
+
   console.log(todo);
   console.log(selectedImage);
 
@@ -84,7 +92,7 @@ export default function TodoDetailClient({
         {/* 버튼 */}
         <div className="flex justify-end pt-6">
           <div className="flex gap-4">
-            <CustomButton label="수정 완료" />
+            <CustomButton label="수정 완료" isActive={isChange} />
             <CustomButton label="삭제하기" />
           </div>
         </div>
