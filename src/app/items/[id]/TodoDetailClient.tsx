@@ -90,7 +90,7 @@ export default function TodoDetailClient({
               h-[311px] rounded-2xl relative 
               flex justify-center items-center 
               bg-slate-50  
-              ${selectedImage ? '' : 'border-slate-300 border-2 border-dashed'}`}
+              ${selectedImage || todo.imageUrl ? '' : 'border-slate-300 border-2 border-dashed'}`}
           >
             <TodoImage
               imageUrl={todo.imageUrl}
