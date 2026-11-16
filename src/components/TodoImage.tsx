@@ -100,7 +100,7 @@ export default function TodoImage({
         className={`
           absolute right-4 bottom-4 
           flex justify-center items-center 
-          ${hasImage ? 'bg-slate-900 opacity-50 border-2 border-slate-900' : 'bg-slate-200'} 
+          ${hasImage ? 'bg-slate-900/50 border-2 border-slate-900' : 'bg-slate-200'} 
           rounded-full w-16 h-16 
           cursor-pointer
           `}
