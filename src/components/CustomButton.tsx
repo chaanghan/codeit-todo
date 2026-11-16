@@ -105,7 +105,7 @@ export default function CustomButton({
       <Image src={`${isActiveIconStyle}`} alt="button" width={16} height={16} />
       <span
         className={`
-            font-bold 
+            font-bold
             text-base 
             whitespace-nowrap
             ${isActiveTextStyle}

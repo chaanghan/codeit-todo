@@ -126,7 +126,7 @@ export default function TodoDetailClient({
             rounded-2xl bg-[url('/images/memo.png')] bg-cover bg-center 
             flex flex-col items-center"
           >
-            <span className="text-amber-800">Memo</span>
+            <span className="text-amber-800 font-extrabold">Memo</span>
             <label
               htmlFor="todo-memo"
               className="flex w-full h-full items-center justify-center"

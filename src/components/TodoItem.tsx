@@ -68,7 +68,7 @@ export default function TodoItem({
             value={name}
             className={`
               outline-none field-sizing-content 
-              ${variant === 'DETAIL' ? 'underline min-w-20' : ''}
+              ${variant === 'DETAIL' ? 'underline min-w-20 font-bold' : ''}
               `}
             onChange={onChangeName}
           />

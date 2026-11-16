@@ -18,10 +18,10 @@ export default function Empty({ type }: EmptyProps) {
         alt="empty image"
       />
       <div className="flex flex-col items-center">
-        <span className="text-slate-400">
+        <span className="text-slate-400 font-bold">
           {type === 'TODO' ? '할 일이 없어요.' : '아직 다 한 일이 없어요.'}
         </span>
-        <span className="text-slate-400">
+        <span className="text-slate-400 font-bold">
           {type === 'TODO'
             ? 'TODO를 새롭게 추가해주세요!'
             : '해야 할 일을 체크해보세요!'}
