@@ -38,12 +38,12 @@ export default function TodoItem({
     >
       <div className="flex gap-2 items-center">
         {/* 체크 박스 */}
-        <label>
+        <label className="cursor-pointer">
           <input
             type="checkbox"
             checked={isCompleted}
             onChange={(e) => onToggle(id, e.target.checked)}
-            className="peer sr-only"
+            className="sr-only"
           />
           <Image
             src={
@@ -68,26 +68,13 @@ export default function TodoItem({
             {name}
           </div>
         ) : (
-          <>
-            <input
-              type="text"
-              value={name}
-              className="outline-none"
-              onChange={onChangeName}
-            />
-          </>
+          <input
+            type="text"
+            value={name}
+            className={`outline-none field-sizing-content ${variant === 'DETAIL' ? 'underline' : ''}`}
+            onChange={onChangeName}
+          />
         )}
-
-        {/* <div
-          onClick={() => {
-            if (variant === 'LIST') router.push(`/items/${id}`);
-          }}
-          className={`
-          ${type === 'TODO' ? '' : 'line-through'} 
-          ${variant === 'LIST' ? 'flex-1 cursor-pointer' : 'underline'}`}
-        >
-          {name}
-        </div> */}
       </div>
     </div>
   );
