@@ -5,7 +5,7 @@ import { TodoItemType } from '@/types/type';
 import TodoItem from '@/components/TodoItem';
 import CustomButton from '@/components/CustomButton';
 import TodoImage from '@/components/TodoImage';
-import { updateTodo, uploadImage } from '@/lib/todo';
+import { deleteTodo, updateTodo, uploadImage } from '@/lib/todo';
 import { useRouter } from 'next/navigation';
 
 interface TodoDetailClientProps {
@@ -65,6 +65,21 @@ export default function TodoDetailClient({
       alert('실패했습니다. 다시 시도해 주세요.');
     } finally {
       router.replace('/'); // 홈으로 이동
+    }
+  };
+
+  // 할 일 삭제
+  const deleteTodoItem = async () => {
+    const confirm = window.confirm('정말로 삭제하시겠습니까?');
+    if (!confirm) return;
+
+    try {
+      await deleteTodo(todo.id);
+
+      router.replace('/');
+    } catch (error) {
+      console.error('할 일 삭제 실패:', error);
+      alert('할 일 삭제에 실패했습니다.');
     }
   };
 
@@ -144,7 +159,7 @@ export default function TodoDetailClient({
               isActive={isChange}
               onClick={saveTodo}
             />
-            <CustomButton label="삭제하기" />
+            <CustomButton label="삭제하기" onClick={deleteTodoItem} />
           </div>
         </div>
       </div>

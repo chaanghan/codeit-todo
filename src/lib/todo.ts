@@ -68,6 +68,17 @@ export async function updateTodo(
   return res.json();
 }
 
+// 이미지 삭제
+export async function deleteTodo(itemId: number): Promise<void> {
+  const res = await fetch(`${BASE_URL}/items/${itemId}`, {
+    method: 'DELETE',
+  });
+
+  if (!res.ok) {
+    throw new Error('Todo 삭제 실패');
+  }
+}
+
 // 이미지 업로드
 export async function uploadImage(file: File): Promise<string> {
   const formData = new FormData();

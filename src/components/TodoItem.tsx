@@ -36,7 +36,7 @@ export default function TodoItem({
         ${variantStyles[variant]}
         `}
     >
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center w-full">
         {/* 체크 박스 */}
         <label className="cursor-pointer">
           <input
