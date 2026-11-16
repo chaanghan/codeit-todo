@@ -70,9 +70,14 @@ export default function TodoDetailClient({
 
   return (
     <div className="flex flex-col flex-1 bg-gray-50">
-      <div className="w-full flex-1 max-w-300 mx-auto bg-white px-[102px] ">
+      <div
+        className="
+      w-full lg:max-w-300 flex-1 
+      bg-white  
+      mx-auto px-4 md:px-6 lg:px-[102px]"
+      >
         {/* 할 일 */}
-        <div className="py-6">
+        <div className="py-4 lg:py-6">
           <TodoItem
             key={id}
             item={todo}
@@ -84,7 +89,7 @@ export default function TodoDetailClient({
         </div>
 
         {/* 이미지 및 텍스트 */}
-        <div className="grid grid-cols-[2fr_3fr] gap-4 ">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[2fr_3fr]">
           <div
             className={`
               h-[311px] rounded-2xl relative 
@@ -117,8 +122,8 @@ export default function TodoDetailClient({
         </div>
 
         {/* 버튼 */}
-        <div className="flex justify-end pt-6">
-          <div className="flex gap-4">
+        <div className="flex pb-8 md:justify-center md:pb-8 lg:justify-end pt-6">
+          <div className="flex w-full justify-between md:justify-center lg:justify-end  gap-4">
             <CustomButton
               label="수정 완료"
               isActive={isChange}
