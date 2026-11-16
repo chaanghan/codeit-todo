@@ -107,10 +107,10 @@ export default function TodoImage({
       >
         {hasImage ? (
           <Image
-            src={'/images/edit.png'}
+            src={'/images/image-edit.svg'}
             width={24}
             height={24}
-            alt="image-plus"
+            alt="image-edit"
           />
         ) : (
           <Image

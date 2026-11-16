@@ -9,6 +9,17 @@ interface EmptyProps {
 export default function Empty({ type }: EmptyProps) {
   return (
     <div className="flex flex-col justify-center items-center gap-4">
+      {/* 모바일 이미지 */}
+      <Image
+        src={
+          type === 'TODO' ? '/images/todo-small.svg' : '/images/done-small.svg'
+        }
+        width={120}
+        height={120}
+        alt="empty image"
+        className="block md:hidden"
+      />
+      {/* 태블릿, PC 이미지 */}
       <Image
         src={
           type === 'TODO' ? '/images/todo-large.svg' : '/images/done-large.svg'
@@ -16,6 +27,7 @@ export default function Empty({ type }: EmptyProps) {
         width={240}
         height={240}
         alt="empty image"
+        className="hidden md:block"
       />
       <div className="flex flex-col items-center">
         <span className="text-slate-400 font-bold">
