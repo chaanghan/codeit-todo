@@ -107,17 +107,32 @@ export default function TodoDetailClient({
           {/* 메모 */}
           <div
             className="
-            h-[311px] p-4
+            h-[311px] p-2
             rounded-2xl bg-[url('/images/memo.png')] bg-cover bg-center 
             flex flex-col items-center"
           >
             <span className="text-amber-800">Memo</span>
-            <textarea
-              name=""
-              id=""
-              className="flex-1 w-full p-2 resize-none outline-none"
-              onChange={updateTodoMemo}
-            ></textarea>
+            <label
+              htmlFor="todo-memo"
+              className="flex w-full h-full items-center justify-center"
+            >
+              <textarea
+                id="todo-memo"
+                value={todo.memo ?? ''}
+                onChange={(e) =>
+                  setTodo((prev) => ({
+                    ...prev,
+                    memo: e.target.value,
+                  }))
+                }
+                className="
+        field-sizing-content
+        min-w-40 min-h-6 max-h-[240px] w-full px-2
+        resize-none overflow-y-auto
+        bg-transparent text-center outline-none
+      "
+              />
+            </label>
           </div>
         </div>
 
