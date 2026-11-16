@@ -122,7 +122,7 @@ export default function TodoDetailClient({
           {/* 메모 */}
           <div
             className="
-            h-[311px] p-2
+            h-[311px] p-4
             rounded-2xl bg-[url('/images/memo.png')] bg-cover bg-center 
             flex flex-col items-center"
           >
