@@ -24,19 +24,14 @@ export default function TodoItem({
   const { id, name, isCompleted } = item;
   const router = useRouter();
 
-  const variantStyles: Record<TodoVariant, string> = {
-    LIST: 'rounded-full',
-    DETAIL: 'justify-center max-w-[996px] rounded-2xl',
-  };
-
   return (
     <div
       className={`flex gap-2 items-center border-2  py-[9px] px-[12px] text-slate-900 
         ${type === 'TODO' ? 'bg-white' : 'bg-violet-100'}
-        ${variantStyles[variant]}
+        ${variant === 'DETAIL' ? 'justify-center max-w-[996px] rounded-2xl' : 'rounded-full'}
         `}
     >
-      <div className="flex gap-2 items-center w-full">
+      <div className="flex gap-2 justify-center items-center w-full">
         {/* 체크 박스 */}
         <label className="cursor-pointer">
           <input
@@ -71,7 +66,10 @@ export default function TodoItem({
           <input
             type="text"
             value={name}
-            className={`outline-none field-sizing-content ${variant === 'DETAIL' ? 'underline' : ''}`}
+            className={`
+              outline-none field-sizing-content 
+              ${variant === 'DETAIL' ? 'underline min-w-20' : ''}
+              `}
             onChange={onChangeName}
           />
         )}

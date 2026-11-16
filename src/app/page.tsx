@@ -1,8 +1,7 @@
 'use client';
 
 import CustomButton from '@/components/CustomButton';
-import Done from '@/components/Done';
-import Todo from '@/components/Todo';
+import TodoSection from '@/components/TodoSection';
 import { addTodo, getTodos, updateTodo } from '@/lib/todo';
 import { TodoItemList } from '@/types/type';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -95,19 +94,13 @@ export default function Home() {
             }}
             placeholder="할 일을 입력해주세요"
             className="
-          h-14
-          min-w-0
+          min-w-0 h-14 px-5
           flex-1
-          rounded-full
-          border-2
-          border-slate-900
-          bg-slate-100
-          px-5
-          outline-none
+          rounded-full outline-none
+          border-2 border-slate-900 bg-slate-100 
           shadow-[3px_4px_0px_#0F172A]
           "
           />
-          {/* <AddButton onClick={handleAddName} isEmpty={isEmpty} /> */}
           <CustomButton
             label="추가하기"
             isActive={isEmpty}
@@ -116,8 +109,8 @@ export default function Home() {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-6 py-4 lg:grid-cols-2">
-        <Todo items={todoList} onToggle={handleUpdateTodo} />
-        <Done items={doneList} onToggle={handleUpdateTodo} />
+        <TodoSection items={todoList} onToggle={handleUpdateTodo} type="TODO" />
+        <TodoSection items={doneList} onToggle={handleUpdateTodo} type="DONE" />
       </div>
     </div>
   );
