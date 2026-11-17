@@ -14,6 +14,15 @@ interface TodoItemProps {
   onChangeName?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * 개별 할 일을 표시하는 컴포넌트.
+ *
+ * type: TODO 또는 DONE에 따른 완료 상태 스타일 구분
+ * variant: LIST(목록) 또는 DETAIL(상세)에 따른 UI 구분
+ *
+ * LIST에서는 항목 클릭 시 상세 페이지로 이동하고,
+ * DETAIL에서는 할 일 이름을 수정할 수 있다.
+ */
 export default function TodoItem({
   item,
   onToggle,

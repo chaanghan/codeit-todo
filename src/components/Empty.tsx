@@ -6,6 +6,12 @@ interface EmptyProps {
   type: EmptyState;
 }
 
+/**
+ * 할 일 목록이 비어 있을 때 표시하는 안내 컴포넌트
+ *
+ * TODO 또는 DONE 상태에 따라 이미지와 안내 문구를 변경하며,
+ * 화면 크기에 따라 모바일 또는 태블릿, PC 화면에 이미지를 표시
+ */
 export default function Empty({ type }: EmptyProps) {
   return (
     <div className="flex flex-col justify-center items-center gap-4">
@@ -16,7 +22,7 @@ export default function Empty({ type }: EmptyProps) {
         }
         width={120}
         height={120}
-        alt="empty image"
+        alt=""
         className="block md:hidden"
       />
       {/* 태블릿, PC 이미지 */}

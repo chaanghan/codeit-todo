@@ -79,7 +79,7 @@ export async function deleteTodo(itemId: number): Promise<void> {
   }
 }
 
-// 이미지 업로드
+// 이미지 추가
 export async function uploadImage(file: File): Promise<string> {
   const formData = new FormData();
 

@@ -9,6 +9,13 @@ interface TodoImageProps {
   onImageChange: (file: File) => void;
 }
 
+/**
+ * 할 일 상세 페이지에서 이미지를 표시하고 변경하는 컴포넌트
+ *
+ * 기존 이미지를 표시하거나 새 이미지를 선택해 미리보기 가능
+ * 선택한 이미지 파일은 유효성 검사 후 부모 컴포넌트에 전달
+ * 실제 서버 업로드는 /lib/todos.ts 경로의 uploadImage 함수에서 실행
+ */
 export default function TodoImage({
   imageUrl,
   selectedImage,
@@ -17,6 +24,7 @@ export default function TodoImage({
   const inputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
+  // 미리보기 URL이 변경되거나 컴포넌트가 언마운트되면 이전 Object URL을 해제
   useEffect(() => {
     if (!previewUrl) return;
 
@@ -25,20 +33,19 @@ export default function TodoImage({
     };
   }, [previewUrl]);
 
-  // 이미지 파일 선택 시 실행
+  // 이미지 파일 선택 시
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
     if (!file) return;
 
-    // 이미지 파일 검사
     if (!file.type.startsWith('image/')) {
       alert('이미지 파일만 선택할 수 있습니다.');
       e.target.value = '';
       return;
     }
 
-    // 파일 이름 검사 (확장자 제외, 영문만 허용)
+    // 확장자를 제외한 파일 이름이 영문 알파벳으로만 구성되었는지 검사
     const nameWithoutExtension = file.name.slice(0, file.name.lastIndexOf('.'));
 
     if (!/^[a-zA-Z]+$/.test(nameWithoutExtension)) {
@@ -47,7 +54,7 @@ export default function TodoImage({
       return;
     }
 
-    // 파일 크기 검사
+    // 이미지 파일 크기를 최대 5MB로 제한
     const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
     if (file.size > MAX_FILE_SIZE) {
@@ -56,14 +63,13 @@ export default function TodoImage({
       return;
     }
 
-    // 파일을 url로 변환
     const url = URL.createObjectURL(file);
 
     onImageChange(file);
     setPreviewUrl(url);
   };
 
-  // 화면에 표시할 이미지 결정
+  // 새로 선택한 이미지가 있으면 미리보기를 우선 표시하고, 없으면 기존 이미지를 표시
   const displayUrl = selectedImage ? previewUrl : imageUrl;
   const hasImage = Boolean(displayUrl);
 
@@ -78,7 +84,6 @@ export default function TodoImage({
         tabIndex={-1}
       />
 
-      {/* 이미지 url이 있다면 */}
       {displayUrl ? (
         <Image
           src={displayUrl}
@@ -87,12 +92,7 @@ export default function TodoImage({
           fill
         />
       ) : (
-        <Image
-          src={'/images/img.svg'}
-          width={64}
-          height={64}
-          alt="미리보기 이미지"
-        />
+        <Image src={'/images/img.svg'} width={64} height={64} alt="" />
       )}
 
       <div
@@ -124,4 +124,3 @@ export default function TodoImage({
     </div>
   );
 }
-<div></div>;

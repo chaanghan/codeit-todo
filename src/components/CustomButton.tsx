@@ -74,6 +74,15 @@ const textStyles: Record<
   },
 };
 
+/**
+ * 할 일 추가, 수정 완료, 삭제 기능에 사용하는 공통 버튼 컴포넌트
+ *
+ * label에 따라 버튼의 색상, 크기, 아이콘을 구분하며,
+ * isActive에 따라 활성화 및 비활성화 스타일을 적용
+ *
+ * 추가하기 버튼은 모바일에서 아이콘만 표시하고,
+ * 태블릿 이상의 화면에서는 아이콘과 텍스트를 함께 표시
+ */
 export default function CustomButton({
   label,
   isActive = false,
@@ -102,7 +111,7 @@ export default function CustomButton({
       `}
       onClick={onClick}
     >
-      <Image src={`${isActiveIconStyle}`} alt="button" width={16} height={16} />
+      <Image src={isActiveIconStyle} alt="button" width={16} height={16} />
       <span
         className={`
             font-bold

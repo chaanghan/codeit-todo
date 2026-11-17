@@ -11,6 +11,10 @@ interface TodoSectionProps {
   type: TodoSectionState;
 }
 
+/**
+ * TODO 또는 DONE 상태에 따라 할 일 목록을 표시
+ * 목록이 비어 있으면 안내 이미지와 메시지를 보여줌
+ */
 export default function TodoSection({
   items,
   onToggle,

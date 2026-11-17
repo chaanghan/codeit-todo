@@ -12,6 +12,16 @@ interface TodoDetailClientProps {
   initialTodo: TodoItemType;
 }
 
+/**
+ * 변경된 할 일 정보를 서버에 저장하는 컴포넌트
+ *
+ * 새 이미지가 선택된 경우
+ * 1. 이미지를 서버에 업로드한다.
+ * 2. 반환받은 이미지 URL을 수정 데이터에 포함한다.
+ * 3. 할 일 정보를 PATCH 요청으로 갱신한다.
+ *
+ * 성공하면 목록 페이지로 이동
+ */
 export default function TodoDetailClient({
   initialTodo,
 }: TodoDetailClientProps) {
@@ -134,12 +144,7 @@ export default function TodoDetailClient({
               <textarea
                 id="todo-memo"
                 value={todo.memo ?? ''}
-                onChange={(e) =>
-                  setTodo((prev) => ({
-                    ...prev,
-                    memo: e.target.value,
-                  }))
-                }
+                onChange={updateTodoMemo}
                 className="
         field-sizing-content
         min-w-40 min-h-6 max-h-[240px] w-full px-2
