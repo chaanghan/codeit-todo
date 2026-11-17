@@ -47,10 +47,10 @@ export default function Home() {
 
   const handleAddName = async () => {
     if (!name.trim()) return;
-    setName('');
 
     try {
       await addTodo({ name }); // 추가 api 요청
+      setName('');
       await loadTodos(); // 데이터 로드
     } catch (error) {
       console.error('할 일 추가 실패', error);
