@@ -25,7 +25,7 @@ const nanumSquare = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Todo List',
+  title: 'Todo It',
   description: '할 일 목록을 관리하는 To Do 서비스',
 };
 
