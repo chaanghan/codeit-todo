@@ -6,7 +6,7 @@ Next.js와 TypeScript를 활용하여 개발한 할 일 관리 애플리케이�
 
 ## 주요 기능
 
-### 1. 할 일 목록 관리
+#### 1. 할 일 목록 관리
 
 - 할 일 목록 조회
 - 새로운 할 일 추가
@@ -14,14 +14,14 @@ Next.js와 TypeScript를 활용하여 개발한 할 일 관리 애플리케이�
 - 완료 여부에 따라 TODO / DONE 목록 구분
 - 목록이 비어 있을 때 안내 화면 표시
 
-### 2. 할 일 상세 관리
+#### 2. 할 일 상세 관리
 
 - 할 일 상세 정보 조회
 - 할 일 이름 및 메모 수정
 - 이미지 업로드 및 미리보기
 - 할 일 삭제
 
-### 3. 반응형 UI
+#### 3. 반응형 UI
 
 - 모바일, 태블릿, 데스크톱 화면 지원
 - 화면 크기에 따른 레이아웃 및 이미지 변경
@@ -29,34 +29,32 @@ Next.js와 TypeScript를 활용하여 개발한 할 일 관리 애플리케이�
 ## 기술 스택
 
 - **Framework:** Next.js (App Router)
-- **Language:** TypeScript
-- **UI:** React
+- **Library:** React, TypeScript
 - **Styling:** Tailwind CSS
 - **Font:** NanumSquare
-- **API:** REST API
 
 ## 시작하기
 
-### 1. 저장소 복제
+#### 1. 저장소 복제
 
 ```bash
-git clone <저장소 주소>
+git clone https://github.com/chaanghan/codeit-todo.git
 cd codeit-todo
 ```
 
-### 2. 패키지 설치
+#### 2. 패키지 설치
 
 ```bash
 npm install
 ```
 
-### 3. 개발 서버 실행
+#### 3. 개발 서버 실행
 
 ```bash
 npm run dev
 ```
 
-### 4. 브라우저에서 접속
+#### 4. 브라우저에서 접속
 
 개발 서버 실행 후 아래 주소로 접속합니다.
 
@@ -64,19 +62,19 @@ http://localhost:3000
 
 ## 사용 방법
 
-### 할 일 추가
+#### 할 일 추가
 
 1. 홈 화면의 입력창에 할 일을 입력합니다.
 2. Enter 키 또는 추가하기 버튼을 누릅니다.
 3. 추가된 할 일이 TODO 목록에 표시됩니다.
 
-### 완료 상태 변경
+#### 완료 상태 변경
 
 1. 할 일 왼쪽의 체크박스를 클릭합니다.
 2. 완료한 항목은 DONE 목록으로 이동합니다.
 3. 체크를 해제하면 다시 TODO 목록으로 이동합니다.
 
-### 할 일 수정 및 삭제
+#### 할 일 수정 및 삭제
 
 1. 목록에서 수정할 할 일을 클릭합니다.
 2. 상세 페이지에서 이름, 메모 또는 이미지를 변경합니다.
@@ -93,9 +91,3 @@ src/
 ├── lib/           # API 함수
 └── types/         # TypeScript 타입 정의
 ```
-
-## API
-
-Codeit에서 제공한 Todo List API를 사용하여 할 일 데이터를 관리합니다.
-
-API 명세: https://codeit.notion.site/e6639357d01641d59bc78f5c4a1c6f3d
