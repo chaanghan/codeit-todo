@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo List
 
-## Getting Started
+Next.js와 TypeScript를 활용하여 개발한 할 일 관리 애플리케이션입니다.
 
-First, run the development server:
+할 일을 추가하고 완료 상태를 관리, 상세 페이지에서 이름, 메모, 이미지를 수정할 수 있습니다. 모바일, 태블릿, 데스크톱 환경을 지원하는 반응형 웹 애플리케이션입니다.
+
+## 주요 기능
+
+### 1. 할 일 목록 관리
+
+- 할 일 목록 조회
+- 새로운 할 일 추가
+- 체크박스를 통한 완료 상태 변경
+- 완료 여부에 따라 TODO / DONE 목록 구분
+- 목록이 비어 있을 때 안내 화면 표시
+
+### 2. 할 일 상세 관리
+
+- 할 일 상세 정보 조회
+- 할 일 이름 및 메모 수정
+- 이미지 업로드 및 미리보기
+- 할 일 삭제
+
+### 3. 반응형 UI
+
+- 모바일, 태블릿, 데스크톱 화면 지원
+- 화면 크기에 따른 레이아웃 및 이미지 변경
+
+## 기술 스택
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **UI:** React
+- **Styling:** Tailwind CSS
+- **Font:** NanumSquare
+- **API:** REST API
+
+## 시작하기
+
+### 1. 저장소 복제
+
+```bash
+git clone <저장소 주소>
+cd codeit-todo
+```
+
+### 2. 패키지 설치
+
+```bash
+npm install
+```
+
+### 3. 개발 서버 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. 브라우저에서 접속
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+개발 서버 실행 후 아래 주소로 접속합니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+http://localhost:3000
 
-## Learn More
+## 사용 방법
 
-To learn more about Next.js, take a look at the following resources:
+### 할 일 추가
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. 홈 화면의 입력창에 할 일을 입력합니다.
+2. Enter 키 또는 추가하기 버튼을 누릅니다.
+3. 추가된 할 일이 TODO 목록에 표시됩니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 완료 상태 변경
 
-## Deploy on Vercel
+1. 할 일 왼쪽의 체크박스를 클릭합니다.
+2. 완료한 항목은 DONE 목록으로 이동합니다.
+3. 체크를 해제하면 다시 TODO 목록으로 이동합니다.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 할 일 수정 및 삭제
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. 목록에서 수정할 할 일을 클릭합니다.
+2. 상세 페이지에서 이름, 메모 또는 이미지를 변경합니다.
+3. 수정 완료 버튼을 눌러 변경 사항을 저장합니다.
+4. 삭제하기 버튼을 누르면 해당 할 일이 삭제됩니다.
+
+## 프로젝트 구조
+
+```text
+src/
+├── app/           # 페이지 및 공통 레이아웃
+├── components/    # 재사용 가능한 UI 컴포넌트
+├── fonts/         # 로컬 폰트 파일
+├── lib/           # API 함수
+└── types/         # TypeScript 타입 정의
+```
+
+## API
+
+Codeit에서 제공한 Todo List API를 사용하여 할 일 데이터를 관리합니다.
+
+API 명세: https://codeit.notion.site/e6639357d01641d59bc78f5c4a1c6f3d
