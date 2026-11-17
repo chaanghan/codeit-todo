@@ -33,7 +33,7 @@ export default function TodoSection({
         ) : (
           <Image
             src={'/images/done.svg'}
-            width={101}
+            width={97}
             height={36}
             alt="done 이미지"
           />
