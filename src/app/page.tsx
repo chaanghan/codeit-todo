@@ -1,6 +1,7 @@
 'use client';
 
 import CustomButton from '@/components/CustomButton';
+import CustomLoading from '@/components/CustomLoading';
 import TodoSection from '@/components/TodoSection';
 import { addTodo, getTodos, updateTodo } from '@/lib/todo';
 import { TodoItemList } from '@/types/type';
@@ -9,13 +10,12 @@ import { ChangeEvent, useEffect, useState } from 'react';
 export default function Home() {
   const [name, setName] = useState('');
   const [todos, setTodos] = useState<TodoItemList[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const todoList = todos.filter((todo) => !todo.isCompleted);
   const doneList = todos.filter((todo) => todo.isCompleted);
 
   const isEmpty = todos.length === 0;
-
-  console.log('todos', todos);
 
   async function loadTodos() {
     try {
@@ -69,6 +69,8 @@ export default function Home() {
         }
       } catch (error) {
         console.error('Todo 조회 실패:', error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -80,38 +82,52 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="mx-auto w-full max-w-300 px-5">
-      <div className="w-full py-6">
-        <div className="flex gap-4">
-          <input
-            type="text"
-            onChange={onChange}
-            value={name}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
-                handleAddName();
-              }
-            }}
-            placeholder="할 일을 입력해주세요"
-            className="
-          min-w-0 h-14 px-5
-          flex-1
-          rounded-full outline-none
-          border-2 border-slate-900 bg-slate-100 
-          shadow-[3px_4px_0px_#0F172A]
-          "
-          />
-          <CustomButton
-            label="추가하기"
-            isActive={isEmpty}
-            onClick={handleAddName}
-          />
+    <>
+      {loading ? (
+        <CustomLoading message="로딩 중..." />
+      ) : (
+        <div className="mx-auto w-full max-w-300 px-5">
+          <div className="w-full py-6">
+            <div className="flex gap-4">
+              <input
+                type="text"
+                onChange={onChange}
+                value={name}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+                    handleAddName();
+                  }
+                }}
+                placeholder="할 일을 입력해주세요"
+                className="
+            min-w-0 h-14 px-5
+            flex-1
+            rounded-full outline-none
+            border-2 border-slate-900 bg-slate-100 
+            shadow-[3px_4px_0px_#0F172A]
+            "
+              />
+              <CustomButton
+                label="추가하기"
+                isActive={isEmpty}
+                onClick={handleAddName}
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-6 py-4 lg:grid-cols-2">
+            <TodoSection
+              items={todoList}
+              onToggle={handleUpdateTodo}
+              type="TODO"
+            />
+            <TodoSection
+              items={doneList}
+              onToggle={handleUpdateTodo}
+              type="DONE"
+            />
+          </div>
         </div>
-      </div>
-      <div className="grid grid-cols-1 gap-6 py-4 lg:grid-cols-2">
-        <TodoSection items={todoList} onToggle={handleUpdateTodo} type="TODO" />
-        <TodoSection items={doneList} onToggle={handleUpdateTodo} type="DONE" />
-      </div>
-    </div>
+      )}
+    </>
   );
 }
